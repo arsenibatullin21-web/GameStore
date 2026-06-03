@@ -1,10 +1,106 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GameStore{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
+    <header class="site-header">
+        <nav class="store-nav" aria-label="Main navigation">
+            <a class="store-brand" href="/" aria-label="GameStore home">
+                <span class="brand-mark">G</span>
+                <span class="brand-name">GameStore</span>
+            </a>
 
+            <button class="nav-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#storeNavigation" aria-controls="storeNavigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="collapse store-nav-content" id="storeNavigation">
+                <div class="nav-primary">
+                    <a class="nav-link active" href="/">Discover</a>
+                    <a class="nav-link" href="/browse/">Browse</a>
+                    <a class="nav-link" href="/news/">News</a>
+                </div>
+
+                <form class="store-search" action="/browse/" method="get" role="search">
+                    <label class="visually-hidden" for="game-search">Search games</label>
+                    <input id="game-search" name="q" type="search" placeholder="Search store" autocomplete="off">
+                </form>
+
+                <div class="nav-actions">
+                    <a class="nav-link" href="/wishlist/">Wishlist</a>
+                    <a class="nav-link" href="/login/">Sign In</a>
+                    <a class="btn-download" href="/cart/">Cart</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="site-main">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <a class="store-brand footer-brand" href="/" aria-label="GameStore home">
+                    <span class="brand-mark">G</span>
+                    <span class="brand-name">GameStore</span>
+                </a>
+
+                <div class="social-links" aria-label="Social links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="X">x</a>
+                    <a href="#" aria-label="YouTube">yt</a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <section>
+                    <h2>Store</h2>
+                    <a href="/browse/">Browse Games</a>
+                    <a href="/free-games/">Free Games</a>
+                    <a href="/deals/">Deals</a>
+                    <a href="/wishlist/">Wishlist</a>
+                </section>
+
+                <section>
+                    <h2>Account</h2>
+                    <a href="/login/">Sign In</a>
+                    <a href="/register/">Create Account</a>
+                    <a href="/cart/">Cart</a>
+                    <a href="/orders/">Orders</a>
+                </section>
+
+                <section>
+                    <h2>Support</h2>
+                    <a href="/support/">Help Center</a>
+                    <a href="/refunds/">Refund Policy</a>
+                    <a href="/contact/">Contact Us</a>
+                    <a href="/faq/">FAQ</a>
+                </section>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; {% now "Y" %} GameStore. All rights reserved.</p>
+                <div class="legal-links">
+                    <a href="/terms/">Terms</a>
+                    <a href="/privacy/">Privacy</a>
+                    <a href="/cookies/">Cookies</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
