@@ -5,6 +5,19 @@
 {% block content %}
 <section class="news-page">
     <div class="news-kicker">News</div>
+
+        <div class="discover-bar">
+        <form class="discover-search" action="/browse/" method="get" role="search">
+            <label class="visually-hidden" for="home-game-search">Search games</label>
+            <input id="home-game-search" name="q" type="search" placeholder="Search store" autocomplete="off">
+        </form>
+
+        <nav class="discover-tabs" aria-label="Store sections">
+            <a href="{% url 'main:home' %}">Discover</a>
+            <a href="#" >Browse</a>
+            <a href="#" class="active">News</a>
+        </nav>
+    </div>
     <header class="news-header">
         <h1>GameStore News</h1>
         <p>Latest updates, interviews, guides, demos, and stories from the world of PC gaming.</p>
