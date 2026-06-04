@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main.models import Product, Platform, Genre, ProductImage
+from main.models import Product, Platform, Genre, ProductImage, News
 
 
 # Register your models here.
@@ -25,6 +25,11 @@ class PlatformAdmin(admin.ModelAdmin):
 class GenderAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug']
     prepopulated_fields = {'slug': ('name', )}
+
+@admin.register(News)
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ['title', 'slug','short_description', 'author']
+
 
 
 

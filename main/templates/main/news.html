@@ -1,0 +1,136 @@
+{% extends 'main/base.html' %}
+
+{% block title %}GameStore | News{% endblock %}
+
+{% block content %}
+<section class="news-page">
+    <div class="news-kicker">News</div>
+    <header class="news-header">
+        <h1>GameStore News</h1>
+        <p>Latest updates, interviews, guides, demos, and stories from the world of PC gaming.</p>
+    </header>
+
+    <section class="news-featured" aria-label="Featured news">
+        <a class="featured-news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/1817070/header.jpg" alt="Hero action game">
+            <div class="news-card-body">
+                <span class="news-date">1d ago</span>
+                <h2>007 First Light: 7 tips to help you master the art of espionage</h2>
+                <p>Sharpen your instincts, stay quiet, and learn how to move like a professional agent.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="featured-news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg" alt="Resident Evil game">
+            <div class="news-card-body">
+                <span class="news-date">3d ago</span>
+                <h2>Resident Evil Requiem reveals a darker survival horror showcase</h2>
+                <p>A closer look at tension, atmosphere, and the terrifying details behind the newest chapter.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+    </section>
+
+    <section class="news-grid" aria-label="Latest articles">
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg" alt="Rocket League">
+            <div class="news-card-body">
+                <span class="news-date">6d ago</span>
+                <h2>Rocket League tips to help you master the basics</h2>
+                <p>There has never been a better time to jump into the popular multiplayer game.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/1091500/header.jpg" alt="Cyberpunk 2077">
+            <div class="news-card-body">
+                <span class="news-date">7d ago</span>
+                <h2>A day and a night in Cyberpunk 2077</h2>
+                <p>One visitor's story of travel, tourism, and temptation in Night City.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/1245620/header.jpg" alt="Elden Ring">
+            <div class="news-card-body">
+                <span class="news-date">7d ago</span>
+                <h2>The best fantasy worlds to explore this month</h2>
+                <p>From difficult boss fights to quiet ruins, these worlds reward curiosity.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg" alt="The Witcher 3">
+            <div class="news-card-body">
+                <span class="news-date">8d ago</span>
+                <h2>How open-world RPGs keep side quests memorable</h2>
+                <p>Strong characters, meaningful choices, and small details can make optional stories unforgettable.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="Apex Legends">
+            <div class="news-card-body">
+                <span class="news-date">9d ago</span>
+                <h2>Team shooters are changing how players learn together</h2>
+                <p>Smart tutorials, seasonal updates, and replay tools help new players improve faster.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg" alt="Counter-Strike">
+            <div class="news-card-body">
+                <span class="news-date">10d ago</span>
+                <h2>The best competitive settings for sharper PC play</h2>
+                <p>Small setup changes can make aiming, visibility, and reaction time feel cleaner.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/270880/header.jpg" alt="Truck simulator">
+            <div class="news-card-body">
+                <span class="news-date">11d ago</span>
+                <h2>Why driving sims are perfect weekend games</h2>
+                <p>Slow roads, long routes, and calm progression create a different kind of challenge.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg" alt="Hollow Knight">
+            <div class="news-card-body">
+                <span class="news-date">12d ago</span>
+                <h2>Metroidvania games that reward patience</h2>
+                <p>These adventures make every new route, shortcut, and secret feel earned.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+
+        <a class="news-card" href="#">
+            <img src="https://cdn.akamai.steamstatic.com/steam/apps/774171/header.jpg" alt="Muse Dash">
+            <div class="news-card-body">
+                <span class="news-date">14d ago</span>
+                <h2>The best rhythm games for PC</h2>
+                <p>Rhythm games are going through a renaissance with bold visuals and sharper song libraries.</p>
+                <strong>Read more</strong>
+            </div>
+        </a>
+    </section>
+
+    <nav class="news-pagination" aria-label="News pages">
+        <a class="active" href="#">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#">5</a>
+        <span>...</span>
+    </nav>
+</section>
+{% endblock %}

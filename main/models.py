@@ -100,3 +100,24 @@ class ProductImage(models.Model):
         return f'{self.product.name} - {self.image.name}'
 
 
+class News(models.Model):
+    title = models.CharField(max_length=50)
+    slug = models.SlugField()
+    short_description = models.TextField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='news/%Y/%m/%d',  default='profile_images/noimgage.jpg')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    author = models.CharField(max_length=50)
+
+    class Meta:
+        ordering = ['created_at']
+        indexes = [
+            models.Index(fields=['created_at'])
+        ]
+        verbose_name = 'News'
+        verbose_name_plural = 'News'
+
+    def __str__(self):
+        return self.title
+

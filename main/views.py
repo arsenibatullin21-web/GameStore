@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from main.models import Product
+from main.models import Product, News
 
 
 class HomePageView(ListView):
@@ -13,4 +13,10 @@ class HomePageView(ListView):
         context = super().get_context_data(**kwargs)
         context['free_games'] = Product.objects.filter(price=0)
         return context
+
+class NewsPageView(ListView):
+    model = News
+    template_name = 'main/news.html'
+
+
 
