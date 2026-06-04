@@ -1,0 +1,262 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}GameStore | Discover{% endblock %}
+
+{% block content %}
+<section class="home-shell">
+    <div class="discover-bar">
+        <form class="discover-search" action="/browse/" method="get" role="search">
+            <label class="visually-hidden" for="home-game-search">Search games</label>
+            <input id="home-game-search" name="q" type="search" placeholder="Search store" autocomplete="off">
+        </form>
+
+        <nav class="discover-tabs" aria-label="Store sections">
+            <a class="active" href="/">Discover</a>
+            <a href="/browse/">Browse</a>
+            <a href="/news/">News</a>
+        </nav>
+    </div>
+
+    <section class="hero-grid" aria-label="Featured games">
+        <article class="hero-card">
+            <img src="" alt="Cyberpunk 2077" id="hero-image">
+            <div class="hero-copy">
+                <span class="eyebrow">Mega Sale Spotlight</span>
+                <h1>Save big on blockbuster games</h1>
+                <p>Explore limited-time deals, free games, and new releases picked for your library.</p>
+                <div class="hero-actions">
+                    <a class="primary-action" href="/browse/">Shop Now</a>
+                    <a class="secondary-action" href="/wishlist/">Add to Wishlist</a>
+                </div>
+            </div>
+        </article>
+
+{#        active #}
+        <aside class="hero-list" aria-label="Featured game list">
+            {% for product in products|slice:5 %}
+                <a class="hero-list-item" href="#" data-image="{{ product.cover_image.url }}">
+                    <img src="{{ product.cover_image.url }}" alt="" >
+                    <span>{{ product.name }}</span>
+                </a>
+            {% endfor %}
+{#            <a class="hero-list-item" href="#">#}
+{#                <img src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg" alt="">#}
+{#                <span>Grand Theft Auto V</span>#}
+{#            </a>#}
+{#            <a class="hero-list-item" href="#">#}
+{#                <img src="https://cdn.akamai.steamstatic.com/steam/apps/292030/header.jpg" alt="">#}
+{#                <span>The Witcher 3</span>#}
+{#            </a>#}
+{#            <a class="hero-list-item" href="#">#}
+{#                <img src="https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg" alt="">#}
+{#                <span>Rocket League</span>#}
+{#            </a>#}
+{#            <a class="hero-list-item" href="#">#}
+{#                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="">#}
+{#                <span>Apex Legends</span>#}
+            </a>
+        </aside>
+    </section>
+
+    <section class="sale-banner">
+        <div>
+            <span>GameStore Mega Sale 2026</span>
+            <h2>Everything in one place: deals, free games, rewards, and more.</h2>
+        </div>
+        <a href="/deals/">See Deals</a>
+    </section>
+
+    <section class="store-section">
+        <div class="section-heading">
+            <h2>Free Games</h2>
+            <a href="/free-games/">View More</a>
+        </div>
+
+        <div class="game-row">
+            {% for game in free_games %}
+                <article class="game-card">
+                    <img src="{{ game.cover_image.url }}" alt="{{ game.name }}">
+                    <span class="game-badge">Free Now</span>
+                    <h3>Rocket League</h3>
+                    <p>Free</p>
+                </article>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="promo-grid">
+        {% for product in products|slice:3 %}
+        <a href="/products/{{ product.slug }}/" class="promo-card">
+            <article>
+                <img src="{{ product.cover_image.url }}" alt="{{ product.name }}">
+                <h2>{{ product.name }}</h2>
+                <p>{{ product.short_description }}</p>
+                {% if product.price != 0 %}
+                    {% if product.discount %}
+                        <div class="promo-price promo-price-discounted">
+                            <small class="discount">-{{ product.discount }}%</small>
+                            <span class="price-values">
+                                <del>{{ product.price }}$</del>
+                                <strong>{{ product.final_price }}$</strong>
+                            </span>
+                        </div>
+                    {% else %}
+                        <div class="promo-price">
+                            <strong>{{ product.final_price }}$</strong>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="promo-price">
+                        <strong>Free</strong>
+                    </div>
+                {% endif %}
+            </article>
+        </a>
+        {% endfor %}
+    </section>
+
+    <section class="triple-lists" aria-label="Popular store lists">
+        <div class="list-column">
+            <div class="list-title">
+                <h2>Best Add-ons</h2>
+                <a href="#" aria-label="View best add-ons">›</a>
+            </div>
+
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg" alt="">
+                <span>
+                    <strong>2 400 V-Bucks</strong>
+                    <em>7 591 KZT</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg" alt="">
+                <span>
+                    <strong>4 500 V-Bucks</strong>
+                    <em>12 148 KZT</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg" alt="">
+                <span>
+                    <strong>12 500 V-Bucks</strong>
+                    <em>30 376 KZT</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/367520/header.jpg" alt="">
+                <span>
+                    <strong>Essence of Ancient Dreams</strong>
+                    <em>49 990 KZT</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg" alt="">
+                <span>
+                    <strong>800 V-Bucks</strong>
+                    <em>3 000 KZT</em>
+                </span>
+            </a>
+        </div>
+
+        <div class="list-column">
+            <div class="list-title">
+                <h2>Most Popular</h2>
+                <a href="#" aria-label="View most popular">›</a>
+            </div>
+
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/2195250/header.jpg" alt="">
+                <span>
+                    <strong>Fortnite</strong>
+                    <em>Free</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#"> {# highlited #}
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/252950/header.jpg" alt="">
+                <span>
+                    <strong>Rocket League</strong>
+                    <em>Free</em>
+                </span>
+            </a>
+            <a class="compact-game price-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/271590/header.jpg" alt="">
+                <span>
+                    <strong>Grand Theft Auto V</strong>
+                    <small>-50 %</small>
+                    <em><del>14 999,00 KZT</del> 7 499,50 KZT</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1172470/header.jpg" alt="">
+                <span>
+                    <strong>VALORANT</strong>
+                    <em>Free</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1716740/header.jpg" alt="">
+                <span>
+                    <strong>Genshin Impact</strong>
+                    <em>Free</em>
+                </span>
+            </a>
+        </div>
+
+        <div class="list-column">
+            <div class="list-title">
+                <h2>Popular Demos</h2>
+                <a href="#" aria-label="View popular demos">›</a>
+            </div>
+
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/1599340/header.jpg" alt="">
+                <span>
+                    <strong>The Beacon - Playtest</strong>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/2050650/header.jpg" alt="">
+                <span>
+                    <strong>Resident Evil Requiem</strong>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/270880/header.jpg" alt="">
+                <span>
+                    <strong>Truck World: Driving Demo</strong>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/774171/header.jpg" alt="">
+                <span>
+                    <strong>Arise - Closed Playtest</strong>
+                    <em>Free</em>
+                </span>
+            </a>
+            <a class="compact-game" href="#">
+                <img src="https://cdn.akamai.steamstatic.com/steam/apps/730/header.jpg" alt="">
+                <span>
+                    <strong>Main Sequence Demo</strong>
+                </span>
+            </a>
+        </div>
+    </section>
+</section>
+
+<script>
+    const heroImage = document.getElementById("hero-image");
+    const gameItems = document.querySelectorAll(".hero-list-item");
+
+    gameItems.forEach(item => {
+        item.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            heroImage.src = this.dataset.image;
+
+            gameItems.forEach(game => game.classList.remove("active"));
+            this.classList.add("active");
+        });
+    });
+</script>
+{% endblock %}

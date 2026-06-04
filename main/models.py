@@ -47,6 +47,7 @@ class Genre(models.Model):
         super().save(*args, **kwargs)
 
 class Product(models.Model):
+    objects = None
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50)
 
