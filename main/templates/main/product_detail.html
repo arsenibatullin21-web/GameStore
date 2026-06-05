@@ -1,0 +1,225 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}GameStore | Detail{% endblock %}
+
+{% block content %}
+<!-- ========== PRODUCT DETAIL PAGE ========== -->
+
+<!-- Hero / Banner -->
+<div class="pd-hero">
+  <div class="pd-hero__bg" style="background-image: {{ product.cover_image.url }};"></div>
+  <div class="pd-hero__overlay"></div>
+</div>
+
+<!-- Main Content -->
+<div class="pd-container">
+  <div class="pd-layout">
+
+    <!-- LEFT: Main Info -->
+    <div class="pd-main">
+
+      <!-- Breadcrumb -->
+      <nav class="pd-breadcrumb">
+        <a href="{% url 'main:home' %}">Store</a>
+        <span>/</span>
+        <a href="{% url 'main:catalog' %}">Browse</a>
+        <span>/</span>
+        <span>{{ product.name }}</span>
+      </nav>
+
+      <!-- Title & Meta -->
+      <div class="pd-title-block">
+        <span class="pd-tag">Base Game</span>
+        <h1 class="pd-title">{{ product.name }}</h1>
+        <p class="pd-developer">
+          <span>Developed by</span>
+          <a href="#">GameStore</a>
+        </p>
+      </div>
+
+      <!-- Media Viewer -->
+      <div class="pd-media">
+        <div class="pd-media__main">
+          <img src="{{ product.cover_image.url }}" alt="Screenshot 1" id="pd-main-img">
+        </div>
+        <div class="pd-media__thumbs">
+          <div class="pd-thumb active" onclick="switchMedia(this, '{{ product.cover_image.url }}">
+            <img src="{{ product.cover_image.url }}" alt="Thumb 1">
+          </div>
+          <div class="pd-thumb" onclick="switchMedia(this, 'https://placehold.co/860x480/111/444?text=Screenshot+2')">
+            <img src="https://placehold.co/130x74/111/444?text=Shot+2" alt="Thumb 2">
+          </div>
+          <div class="pd-thumb" onclick="switchMedia(this, 'https://placehold.co/860x480/111/555?text=Screenshot+3')">
+            <img src="https://placehold.co/130x74/111/555?text=Shot+3" alt="Thumb 3">
+          </div>
+          <div class="pd-thumb" onclick="switchMedia(this, 'https://placehold.co/860x480/0d1117/336?text=Screenshot+4')">
+            <img src="https://placehold.co/130x74/0d1117/336?text=Shot+4" alt="Thumb 4">
+          </div>
+          <div class="pd-thumb" onclick="switchMedia(this, 'https://placehold.co/860x480/0d1117/363?text=Screenshot+5')">
+            <img src="https://placehold.co/130x74/0d1117/363?text=Shot+5" alt="Thumb 5">
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="pd-section">
+        <h2 class="pd-section-title">About This Game</h2>
+        <div class="pd-description">
+          <p>{{ product.short_description }}</p>
+          <p>{{ product.description }}</p>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="pd-section">
+        <h2 class="pd-section-title">Features</h2>
+        <ul class="pd-features">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Singleplayer
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Multiplayer / GTA Online
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Controller Support
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Cloud Saves
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            Achievements
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            4K Ultra HD Support
+          </li>
+        </ul>
+      </div>
+
+      <!-- System Requirements -->
+      <div class="pd-section">
+        <h2 class="pd-section-title">System Requirements</h2>
+        <div class="pd-sysreq">
+          <div class="pd-sysreq__col">
+            <h3>Minimum</h3>
+            <table>
+              <tr><td>OS</td><td>Windows 10 64-bit</td></tr>
+              <tr><td>CPU</td><td>Intel Core i5 3470</td></tr>
+              <tr><td>RAM</td><td>8 GB</td></tr>
+              <tr><td>GPU</td><td>NVIDIA GTX 660 2GB</td></tr>
+              <tr><td>Storage</td><td>72 GB HDD</td></tr>
+            </table>
+          </div>
+          <div class="pd-sysreq__col">
+            <h3>Recommended</h3>
+            <table>
+              <tr><td>OS</td><td>Windows 10 64-bit</td></tr>
+              <tr><td>CPU</td><td>Intel Core i7 3770</td></tr>
+              <tr><td>RAM</td><td>16 GB</td></tr>
+              <tr><td>GPU</td><td>NVIDIA GTX 1060 6GB</td></tr>
+              <tr><td>Storage</td><td>72 GB SSD</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Purchase Sidebar -->
+    <aside class="pd-sidebar">
+
+      <!-- Cover + Rating -->
+      <div class="pd-sidebar__cover">
+        <img src="https://placehold.co/280x370/111/333?text=Cover" alt="GTA V Cover">
+      </div>
+
+      <!-- Price Box -->
+      <div class="pd-purchase">
+        <div class="pd-price-row">
+          <div class="pd-price-main">
+              {% if product.discount %}
+                <span class="pd-discount-badge">-{{ product.discount }}%</span>
+                <span class="pd-price-old">${{ product.price }}</span>
+                <span class="pd-price">${{ product.final_price }}</span>
+              {% else %}
+                  {% if product.price == 0 %}
+                    <span class="pd-price">Free</span>
+                  {% else %}
+                      <span class="pd-price">${{ product.final_price }}</span>
+                  {% endif %}
+              {% endif %}
+          </div>
+        </div>
+
+      {% if product.stock > 0 and product.is_available %}
+        <a href="#"><button class="pd-btn-buy">Add to Cart</button></a>
+      {% else %}
+          <a href="#"><button class="pd-btn-buy notav" disabled>Add to Cart</button></a>
+      {% endif %}
+        <button class="pd-btn-wish">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Add to Wishlist
+        </button>
+      </div>
+
+      <!-- Info Table -->
+      <div class="pd-info-table">
+        <div class="pd-info-row">
+          <span class="pd-info-label">Developer</span>
+          <span class="pd-info-value"><a href="#">Game Store</a></span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-label">Publisher</span>
+          <span class="pd-info-value"><a href="#">Game Store</a></span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-label">Release Date</span>
+          <span class="pd-info-value">Apr 14, 2015</span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-label">Genre</span>
+          <span class="pd-info-value"><a href="#">{{ product.genre.name }}</a></span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-label">Platform</span>
+          <span class="pd-info-value">{{ product.platform }}</span>
+        </div>
+        <div class="pd-info-row">
+          <span class="pd-info-label">Stock</span>
+            {% if product.stock > 0 %}
+                <span class="pd-info-value pd-info-stock">In Stock</span>
+            {% else %}
+                <span class="pd-info-value pd-info-notstock">Not In Stock</span>
+            {% endif %}
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="pd-tags">
+        <span class="pd-tag-pill">Open World</span>
+        <span class="pd-tag-pill">Action</span>
+        <span class="pd-tag-pill">Multiplayer</span>
+        <span class="pd-tag-pill">Crime</span>
+        <span class="pd-tag-pill">Singleplayer</span>
+      </div>
+
+    </aside>
+
+  </div>
+</div>
+
+<!-- JS for media switcher -->
+<script>
+  function switchMedia(thumb, src) {
+    document.getElementById('pd-main-img').src = src;
+    document.querySelectorAll('.pd-thumb').forEach(t => t.classList.remove('active'));
+    thumb.classList.add('active');
+  }
+</script>
+{% endblock %}

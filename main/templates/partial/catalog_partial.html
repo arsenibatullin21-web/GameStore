@@ -1,6 +1,6 @@
  <section class="catalog-results" aria-label="Game results" id="catalog-shell">
             {% for product in products %}
-                <a class="catalog-card" href="#" style="--delay: {{ forloop.counter0 }};">
+                <a class="catalog-card" href="{% url 'main:product_detail' product.slug %}" style="--delay: {{ forloop.counter0 }};">
                     <article>
                         <div class="catalog-cover">
                             <img src="{{ product.cover_image.url }}" alt="{{ product.name }}">

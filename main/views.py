@@ -3,7 +3,7 @@ from os import name
 from django.db.models import Q
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 from main.forms import ProductAddForm
 from main.models import Product, News, Genre, Platform
@@ -106,3 +106,9 @@ class ProductAddView(CreateView):
         context['genres'] = Genre.objects.all()
         context['platforms'] = Platform.objects.all()
         return context
+
+class ProductDetailView(DetailView):
+    model = Product
+    context_object_name = 'product'
+    template_name = 'main/product_detail.html'
+    slug_url_kwarg = 'product_slug'

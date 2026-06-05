@@ -34,7 +34,7 @@
 {#        active #}
         <aside class="hero-list" aria-label="Featured game list">
             {% for product in products|slice:5 %}
-                <a class="hero-list-item" href="#" data-image="{{ product.cover_image.url }}">
+                <a class="hero-list-item" href="" data-image="{{ product.cover_image.url }}">
                     <img src="{{ product.cover_image.url }}" alt="" >
                     <span>{{ product.name }}</span>
                 </a>
@@ -63,7 +63,7 @@
             <span>GameStore Mega Sale 2026</span>
             <h2>Everything in one place: deals, free games, rewards, and more.</h2>
         </div>
-        <a href="/deals/">See Deals</a>
+        <a href="{% url 'main:catalog' %}">See Deals</a>
     </section>
 
     <section class="store-section">
@@ -74,19 +74,21 @@
 
         <div class="game-row">
             {% for game in free_games %}
+                <a href="{% url 'main:product_detail' game.slug %}">
                 <article class="game-card">
                     <img src="{{ game.cover_image.url }}" alt="{{ game.name }}">
                     <span class="game-badge">Free Now</span>
                     <h3>Rocket League</h3>
                     <p>Free</p>
                 </article>
+                </a>
             {% endfor %}
         </div>
     </section>
 
     <section class="promo-grid">
         {% for product in products|slice:3 %}
-        <a href="/products/{{ product.slug }}/" class="promo-card">
+        <a href="{% url 'main:product_detail' product.slug %}" class="promo-card">
             <article>
                 <img src="{{ product.cover_image.url }}" alt="{{ product.name }}">
                 <h2>{{ product.name }}</h2>

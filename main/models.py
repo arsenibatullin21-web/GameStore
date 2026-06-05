@@ -1,6 +1,7 @@
 from random import choices
 
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 
 
@@ -91,6 +92,9 @@ class Product(models.Model):
         if self.discount:
             return self.price - (self.price * self.discount / 100)
         return self.price
+
+    def get_absolute_url(self):
+        return reverse('main:product_detail', kwargs={'product_slug': self.slug})
 
 class ProductImage(models.Model):
     image = models.ImageField(upload_to='products/gallery/%Y/%m/%d')
