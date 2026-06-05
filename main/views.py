@@ -2,8 +2,10 @@ from os import name
 
 from django.db.models import Q
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView
 
+from main.forms import ProductAddForm
 from main.models import Product, News, Genre, Platform
 
 
@@ -93,3 +95,14 @@ class CatalogPageView(ListView):
         
 
 
+class ProductAddView(CreateView):
+    model = Product
+    template_name = 'main/product_add.html'
+    form_class = ProductAddForm
+    success_url = reverse_lazy('main:catalog')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['genres'] = Genre.objects.all()
+        context['platforms'] = Platform.objects.all()
+        return context

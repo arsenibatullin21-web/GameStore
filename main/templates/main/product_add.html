@@ -1,0 +1,217 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block title %}GameStore | add game{% endblock %}
+
+{% block content %}
+<div class="add-product-wrapper">
+  <div class="form-header">
+    <h1>Add New Product</h1>
+    <p>Fill in the details below to add a new game to the store</p>
+  </div>
+
+  <form class="product-form" method="POST" enctype="multipart/form-data" action="{% url 'main:product_add' %}">
+    {% csrf_token %}
+
+    <!-- Basic Info -->
+    <div class="form-section">
+      <h2 class="section-title">Basic Information</h2>
+        {% if form.non_field_errors %}
+            <div class="form-errors">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="name">Game Name <span class="required">*</span></label>
+          <input type="text" id="name" name="{{ form.name.name }}" maxlength="50" placeholder="e.g. Rocket League" required>
+            {% if form.name.errors %}
+                <div class="field-error">
+                    {{ form.name.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="slug">Slug <span class="required">*</span></label>
+          <input type="text" id="slug" name="{{ form.slug.name }}" maxlength="50" placeholder="e.g. rocket-league" required>
+            {% if form.slug.errors %}
+                <div class="field-error">
+                    {{ form.slug.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="short_description">Short Description <span class="required">*</span></label>
+        <textarea id="short_description" name="{{ form.short_description.name }}" rows="2" placeholder="Brief summary shown on game cards..." required></textarea>
+          {% if form.short_description.errors %}
+                <div class="field-error">
+                    {{ form.short_description.errors.0 }}
+                </div>
+            {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="description">Full Description</label>
+        <textarea id="description" name="{{ form.description.name }}" rows="5" placeholder="Detailed description of the game..."></textarea>
+          {% if form.description.errors %}
+                <div class="field-error">
+                    {{ form.description.errors.0 }}
+                </div>
+            {% endif %}
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="form-section">
+      <h2 class="section-title">Pricing</h2>
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="price">Price ($) <span class="required">*</span></label>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="price" name="{{ form.price.name }}" step="0.01" min="0" placeholder="0.00" required>
+            {% if form.price.errors %}
+                <div class="field-error">
+                    {{ form.price.errors.0 }}
+                </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="discount">Discount (%)</label>
+          <div class="input-suffix">
+            <input type="number" id="discount" name="{{ form.discount.name }}" min="0" max="100" placeholder="0" value="0">
+            <span>%</span>
+              {% if form.discount.errors %}
+                <div class="field-error">
+                    {{ form.discount.errors.0 }}
+                </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Media -->
+    <div class="form-section">
+      <h2 class="section-title">Media</h2>
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="cover_image">Cover Image</label>
+          <div class="file-upload">
+            <input type="file" id="cover_image" name="{{ form.cover_image.name }}" accept="image/*">
+            <label for="cover_image" class="file-upload-label">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Choose Image</span>
+            </label>
+            <p class="file-hint">JPG, PNG, WEBP supported</p>
+              {% if form.cover_image.errors %}
+                <div class="field-error">
+                    {{ form.cover_image.errors.0 }}
+                </div>
+            {% endif %}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="trailer_url">Trailer URL</label>
+          <input type="url" id="trailer_url" name="{{ form.trailer_url.name }}" placeholder="https://youtube.com/...">
+            {% if form.trailer_url.errors %}
+                <div class="field-error">
+                    {{ form.trailer_url.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Classification -->
+    <div class="form-section">
+      <h2 class="section-title">Classification</h2>
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="genre">Genre <span class="required">*</span></label>
+          <select id="genre" name="{{ form.genre.name }}" required>
+            <option value="" disabled selected>Select a genre</option>
+            {% for genre in genres %}
+              <option value="{{ genre.id }}">{{ genre.name }}</option>
+            {% endfor %}
+          </select>
+            {% if form.genre.errors %}
+                <div class="field-error">
+                    {{ form.genre.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="platform">Platform <span class="required">*</span></label>
+          <select id="platform" name="{{ form.platform.name }}" required>
+            <option value="" disabled selected>Select a platform</option>
+            {% for platform in platforms %}
+              <option value="{{ platform.id }}">{{ platform.name }}</option>
+            {% endfor %}
+          </select>
+        {% if form.platform.errors %}
+                <div class="field-error">
+                    {{ form.platform.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Inventory & Visibility -->
+    <div class="form-section">
+      <h2 class="section-title">Inventory & Visibility</h2>
+      <div class="form-row two-col">
+        <div class="form-group">
+          <label for="stock">Stock <span class="required">*</span></label>
+          <input type="number" id="stock" name="{{ form.stock.name }}" min="0" placeholder="0" value="0" required>
+            {% if form.stock.errors %}
+                <div class="field-error">
+                    {{ form.stock.errors.0 }}
+                </div>
+            {% endif %}
+        </div>
+        <div class="form-group checkboxes-group">
+          <label class="group-label">Options</label>
+          <div class="checkboxes">
+            <label class="checkbox-item">
+              <input type="checkbox" name="{{ form.is_available.name }}" checked>
+              <span class="checkmark"></span>
+              Available
+                {% if form.is_available.errors %}
+                <div class="field-error">
+                    {{ form.is_available.errors.0 }}
+                </div>
+            {% endif %}
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" name="{{ form.is_featured.name }}">
+              <span class="checkmark"></span>
+              Featured
+                {% if form.is_featured.errors %}
+                <div class="field-error">
+                    {{ form.is_featured.errors.0 }}
+                </div>
+            {% endif %}
+            </label>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="form-actions">
+      <button type="reset" class="btn-cancel">Cancel</button>
+      <button type="submit" class="btn-submit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        Add Product
+      </button>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
