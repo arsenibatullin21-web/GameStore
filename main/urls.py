@@ -9,4 +9,5 @@ app_name = 'main'
 urlpatterns = [
     path('', views.HomePageView.as_view(), name='home'),
     path('news/', views.NewsPageView.as_view(), name='news'),
+    path('browse/', views.CatalogPageView.as_view(), name='catalog'),
 ]

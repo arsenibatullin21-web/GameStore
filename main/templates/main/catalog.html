@@ -1,0 +1,94 @@
+{% extends 'main/base.html' %}
+
+{% block title %}GameStore | Browse{% endblock %}
+
+{% block content %}
+<section class="catalog-page" id="catalog-all">
+<form action="{% url 'main:catalog' %}" method="GET"
+      hx-target="#catalog-shell"
+      hx-get="{% url 'main:catalog' %}"
+      hx-trigger="change"
+      hx-push-url="true"
+>
+     <div class="catalog-toolbar">
+            <label class="visually-hidden" for="catalog-search">Search catalog</label>
+            <input id="catalog-search" name="q" type="search" placeholder="Search store" autocomplete="off" {% if selected_search %}value="{{ selected_search }}"{% endif %}
+                    hx-get="{% url 'main:catalog' %}"
+                   hx-target="#catalog-shell"
+                   hx-trigger="keyup changed delay:300ms"
+                   hx-include="closest form"
+
+            >
+
+        <nav class="discover-tabs catalog-tabs" aria-label="Store sections">
+            <a href="/">Discover</a>
+            <a class="active" href="/browse/">Browse</a>
+            <a href="/news/">News</a>
+        </nav>
+    </div>
+
+    <header class="catalog-header">
+        <div>
+            <span>Browse</span>
+            <h1>Games</h1>
+        </div>
+
+        <label class="catalog-sort">
+            <span>Sort by</span>
+            <select name="sort">
+                <option value="New" {% if selected_sort == 'New' %}selected{% endif %}>New Release</option>
+                <option value="Recent_upd" {% if selected_sort == 'Recent_upd' %}selected{% endif %}>Recently Updated</option>
+                <option value="Lth" {% if selected_sort == 'Lth' %}selected{% endif %}>Price: Low to High</option>
+                <option value="Htl" {% if selected_sort == 'Htl' %}selected{% endif %}>Price: High to Low</option>
+                <option value="Discount" {% if selected_sort == 'Discount' %}selected{% endif %}>Discount</option>
+            </select>
+        </label>
+    </header>
+
+    <div class="catalog-layout">
+        <aside class="catalog-filters" aria-label="Catalog filters">
+            <div class="filter-heading">
+                <h2>Filters</h2>
+                <a href="{% url 'main:catalog' %}"
+
+                >
+                    Reset</a>
+            </div>
+
+            <details open>
+                <summary>Price</summary>
+                <label><input type="radio" name="price" value="free" > Free</label>
+                <label><input type="radio" name="price" value="under-10" > Under $10</label>
+                <label><input type="radio" name="price" value="below-10" > Below $10</label>
+                <label><input type="radio" name="price" value="discounted"> On Sale</label>
+            </details>
+
+            <details open>
+                <summary>Genre</summary>
+                {% for genre in genres %}
+                    <label><input type="checkbox" name="genre" value="{{ genre.slug }}">{{ genre.name }}</label>
+                {% endfor %}
+            </details>
+
+            <details>
+                <summary>Platform</summary>
+                {% for platform in platforms %}
+                    <label><input type="checkbox" name="platform" value="{{ platform.slug }}">{{ platform.name }}</label>
+                {% endfor %}
+            </details>
+
+            <details>
+                <summary>Features</summary>
+                <label><input type="checkbox" name="feature" value="single-player"> Single Player</label>
+                <label><input type="checkbox" name="feature" value="multiplayer"> Multiplayer</label>
+                <label><input type="checkbox" name="feature" value="controller"> Controller Support</label>
+            </details>
+        </aside>
+
+        <div id="catalog-shell">
+            {% include 'partial/catalog_partial.html' %}
+        </div>
+    </div>
+</form>
+</section>
+{% endblock %}

@@ -1,0 +1,76 @@
+ <section class="catalog-results" aria-label="Game results" id="catalog-shell">
+            {% for product in products %}
+                <a class="catalog-card" href="#" style="--delay: {{ forloop.counter0 }};">
+                    <article>
+                        <div class="catalog-cover">
+                            <img src="{{ product.cover_image.url }}" alt="{{ product.name }}">
+                            {% if product.discount %}
+                                <span>-{{ product.discount }}%</span>
+                            {% endif %}
+                        </div>
+
+                        <div class="catalog-card-body">
+                            <small>Base Game</small>
+                            <h2>{{ product.name }}</h2>
+                            <p>{{ product.short_description|truncatewords:15 }}</p>
+
+                            {% if product.price != 0 %}
+                                {% if product.discount %}
+                                    <div class="catalog-price">
+                                        <del>{{ product.price }}$</del>
+                                        <strong>{{ product.final_price }}$</strong>
+                                    </div>
+                                {% else %}
+                                    <div class="catalog-price">
+                                        <strong>{{ product.final_price }}$</strong>
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                <div class="catalog-price">
+                                    <strong>Free</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </article>
+                </a>
+            {% endfor %}
+        </section>
+
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+    {% if page_obj.has_previous %}
+    <a class="page-btn prev-btn" aria-label="Previous page" href="?page={{ page_obj.previous_page_number }}"
+       hx-get="?page={{ page_obj.previous_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
+       hx-target="#catalog-shell"
+       hx-push-url="true"
+    >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    </a>
+
+    {% endif %}
+
+    {% for p in page_obj.paginator.page_range %}
+        {% if page_obj.number|add:-2 <= p and page_obj.number|add:2 >= p %}
+        <a class="page-btn {% if page_obj.number == p %}active{% endif %}" href="?page={{ p }}"
+               hx-get="?page={{ p }}{% if query_params %}&{{ query_params }}{% endif %}"
+       hx-target="#catalog-shell"
+       hx-push-url="true"
+        >{{ p }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+  <a class="page-btn next-btn" aria-label="Next page" href="?page={{ page_obj.next_page_number }}"
+        hx-get="?page={{ page_obj.next_page_number }}{% if query_params %}&{{ query_params }}{% endif %}"
+       hx-target="#catalog-shell"
+       hx-push-url="true"
+  >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+    {% endif %}
+</div>
+{% endif %}
