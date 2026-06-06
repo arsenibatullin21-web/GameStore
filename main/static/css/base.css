@@ -2189,3 +2189,324 @@ a:hover {
   .pd-hero { height: 250px; }
   .pd-thumb { width: 90px; height: 52px; }
 }
+
+/* ── Page Layout ── */
+.login-page {
+  display: flex;
+  min-height: 100vh;
+  background: #0e0e0e;
+  font-family: inherit;
+}
+
+/* ── Left Panel ── */
+.login-left {
+  position: relative;
+  width: 45%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 48px;
+}
+.login-left__bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 180, 216, 0.07) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 100, 140, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.login-left__bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.login-left__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 380px;
+}
+.login-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 64px;
+}
+.login-brand__icon {
+  width: 38px;
+  height: 38px;
+  background: #00b4d8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+}
+.login-brand__name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+.login-left__text h2 {
+  font-size: 40px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.login-left__text p {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+.login-left__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.login-left__tags span {
+  font-size: 12px;
+  color: #888;
+  background: #141414;
+  border: 1px solid #222;
+  border-radius: 20px;
+  padding: 5px 14px;
+}
+
+/* ── Right Panel ── */
+.login-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  border-left: 1px solid #1a1a1a;
+}
+.login-form-wrap {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ── Form Header ── */
+.login-header {
+  margin-bottom: 36px;
+}
+.login-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.login-header p {
+  font-size: 14px;
+  color: #555;
+}
+.login-header a {
+  color: #00b4d8;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.login-header a:hover { color: #0096b5; }
+
+/* ── Form Groups ── */
+.lf-group {
+  margin-bottom: 20px;
+}
+.lf-group label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+.lf-forgot {
+  font-size: 12px;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.lf-forgot:hover { color: #00b4d8; }
+
+/* ── Input Wrap ── */
+.lf-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.lf-icon {
+  position: absolute;
+  left: 14px;
+  color: #444;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+.lf-input-wrap input {
+  width: 100%;
+  background: #141414;
+  border: 1px solid #252525;
+  border-radius: 6px;
+  color: #e0e0e0;
+  font-size: 14px;
+  font-family: inherit;
+  padding: 12px 14px 12px 42px;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  box-sizing: border-box;
+}
+.lf-input-wrap input:focus {
+  border-color: #00b4d8;
+  background: #161616;
+}
+.lf-input-wrap input::placeholder { color: #333; }
+.lf-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #444;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  transition: color 0.15s;
+}
+.lf-eye:hover { color: #aaa; }
+
+/* ── Remember ── */
+.lf-remember { margin-bottom: 24px; }
+.lf-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #888;
+  user-select: none;
+  position: relative;
+  padding-left: 26px;
+}
+.lf-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+}
+.lf-checkmark {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.lf-checkbox input:checked ~ .lf-checkmark {
+  background: #00b4d8;
+  border-color: #00b4d8;
+}
+.lf-checkmark::after {
+  content: '';
+  position: absolute;
+  display: none;
+  left: 5px; top: 2px;
+  width: 5px; height: 9px;
+  border: 2px solid #fff;
+  border-top: none; border-left: none;
+  transform: rotate(45deg);
+}
+.lf-checkbox input:checked ~ .lf-checkmark::after { display: block; }
+
+/* ── Submit Button ── */
+.lf-btn-submit {
+  width: 100%;
+  padding: 13px;
+  background: #00b4d8;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: background 0.15s, transform 0.1s;
+  margin-bottom: 24px;
+}
+.lf-btn-submit:hover { background: #0096b5; }
+.lf-btn-submit:active { transform: scale(0.99); }
+
+/* ── Divider ── */
+.lf-divider {
+  position: relative;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.lf-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0; right: 0;
+  height: 1px;
+  background: #1e1e1e;
+}
+.lf-divider span {
+  position: relative;
+  background: #0e0e0e;
+  padding: 0 14px;
+  font-size: 12px;
+  color: #444;
+}
+
+/* ── Social Buttons ── */
+.lf-socials {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.lf-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px;
+  background: #141414;
+  border: 1px solid #252525;
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.lf-social-btn:hover {
+  background: #1a1a1a;
+  border-color: #333;
+  color: #fff;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .login-page { flex-direction: column; }
+  .login-left {
+    width: 100%;
+    padding: 40px 24px 32px;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .login-left__text h2 { font-size: 28px; }
+  .login-right { padding: 40px 24px; }
+  .lf-divider span { background: #0e0e0e; }
+}

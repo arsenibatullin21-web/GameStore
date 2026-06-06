@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class User(AbstractUser):
-    image = models.ImageField(upload_to='profile_image/', default='profile_images/noimgage.jpg')
+    image = models.ImageField(upload_to='profile_image/', default='profile_images/noimage.jpg')
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=20, blank=True)
     stripe_customer_id = models.CharField(
