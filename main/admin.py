@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from main.models import Product, Platform, Genre, ProductImage, News
+from main.models import Product, Platform, Genre, ProductImage, News, PromoCode
 
 
 # Register your models here.
@@ -29,6 +29,10 @@ class GenderAdmin(admin.ModelAdmin):
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ['title', 'slug','short_description', 'author']
+
+@admin.register(PromoCode)
+class PromoCodeAdmin(admin.ModelAdmin):
+    list_display = '__all__'
 
 
 

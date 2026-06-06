@@ -4,6 +4,9 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 
+class Available(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_available=True)
 
 class Platform(models.Model):
     name = models.CharField(max_length=50)
@@ -124,4 +127,20 @@ class News(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class PromoCode(models.Model):
+    name = models.CharField(max_length=10, unique=True)
+    discount = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f'{self.name} - {self.discount}'
+
+    class Meta:
+        ordering = ['discount']
+        indexes = [
+            models.Index(fields=['discount'])
+        ]
+        verbose_name = "Promo Code"
+        verbose_name_plural = "Promo Codes"
 
