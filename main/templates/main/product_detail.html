@@ -158,7 +158,10 @@
         </div>
 
       {% if product.stock > 0 and product.is_available %}
-        <a href="#"><button class="pd-btn-buy">Add to Cart</button></a>
+          <form action="{% url 'cart:add' product.id %}" method="post">
+           {% csrf_token %}
+        <button class="pd-btn-buy">Add to Cart</button>
+          </form>
       {% else %}
           <a href="#"><button class="pd-btn-buy notav" disabled>Add to Cart</button></a>
       {% endif %}

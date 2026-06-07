@@ -12,7 +12,7 @@
 <body>
     <header class="site-header">
         <nav class="store-nav" aria-label="Main navigation">
-            <a class="store-brand" href="/" aria-label="GameStore home">
+            <a class="store-brand" href="{% url 'main:home' %}" aria-label="GameStore home">
                 <span class="brand-mark">G</span>
                 <span class="brand-name">GameStore</span>
             </a>
@@ -25,7 +25,7 @@
 
             <div class="collapse store-nav-content" id="storeNavigation">
                 <div class="nav-primary">
-                    <a class="nav-link {% if 'news' in request.path or 'browse' in request.path or request.path == '/'  %}active"{% endif %} href="/">Discover</a>
+                    <a class="nav-link {% if 'news' in request.path or 'browse' in request.path or request.path == '/'  %}active{% endif %}" href="{% url 'main:home' %}">Discover</a>
                     <a class="nav-link {% if 'support' in request.path %}active{% endif %}" href="/">Support</a>
                     <a class="nav-link {% if 'distribute' in request.path %}active{% endif %}" href="/">Distribute</a>
                 </div>

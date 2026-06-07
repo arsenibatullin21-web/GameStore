@@ -32,7 +32,7 @@ class NewsAdmin(admin.ModelAdmin):
 
 @admin.register(PromoCode)
 class PromoCodeAdmin(admin.ModelAdmin):
-    list_display = '__all__'
+    list_display = ['name', 'discount']
 
 
 
