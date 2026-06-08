@@ -129,8 +129,19 @@
           <span class="cs-tax">Calculated at Checkout</span>
         </div>
           <div class="cs-row">
-          <span>Promo Code:</span>
-              <input type="text" class="promo-wrap" placeholder="Enter code...">
+                  <span>Promo Code:</span>
+                  {% if promo %}
+                      <input type="text" class="promo-wrap" placeholder="{{ promo }}"  disabled>
+
+                      <form action="{% url 'cart:remove_promo' %}">
+                      {% csrf_token %}
+                        <button type='submit'>REMOVE</button>
+                      </form>
+                  {% else %}
+                      <form action="{% url 'cart:apply_promo' %}">
+                    <input type="text" class="promo-wrap" placeholder="Enter code..." name="promocode">
+                      </form>
+                  {% endif %}
         </div>
         <div class="cs-row cs-row--discount" id="summary-discount-row">
           <span>Discount</span>

@@ -1,15 +1,20 @@
+from django.contrib.messages.context_processors import messages
+from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
 
 from cart.cart import Cart
-from main.models import Product
+from main.models import Product, PromoCode
 
 
 # Create your views here.
 def cart_detail(request):
     cart = Cart(request)
-    print(list(cart))
-    return render(request, 'cart/cart_detail.html', {'cart': cart, 'total': cart.get_total()})
+    promo = request.session.get('promo', None)
+    promo_obj = None
+    if promo:
+        promo_obj = PromoCode.objects.filter(name__iexact=promo).first()
+    return render(request, 'cart/cart_detail.html', {'cart': cart,'subtotal': cart.get_total(),'total': cart.get_total(promo=promo_obj), 'promo': promo})
 
 @require_POST
 def cart_add(request, product_id):
@@ -35,4 +40,18 @@ def cart_upd_quantity(request, product_id):
     cart = Cart(request)
     action = request.GET.get('action', '')
     cart.update_quantity(product_id=product_id, action=action)
+    return redirect('cart:detail')
+
+def apply_promo(request):
+    promo_name = request.GET.get('promocode', '')
+    promo = PromoCode.objects.filter(name=promo_name).first()
+
+    if promo:
+        request.session['promo'] = promo_name
+
+    return redirect('cart:detail')
+
+def remove_promo(request):
+    request.session.pop('promo', None)
+    request.session.modified = True
     return redirect('cart:detail')
