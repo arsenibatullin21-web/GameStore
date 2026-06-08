@@ -156,7 +156,7 @@
         <span id="summary-subtotal">${{ total }}</span>
       </div>
         {% if cart|length > 0 %}
-      <button class="cs-checkout-btn">Check Out</button>
+            <a href="{% url 'orders:create' %}"><button class="cs-checkout-btn">Check Out</button></a>
         {% else %}
         <button class="cs-checkout-btn" disabled style="cursor: not-allowed">Check Out</button>
         {% endif %}

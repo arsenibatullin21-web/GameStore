@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'main',
     'user',
     'cart',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +139,4 @@ LOGOUT_REDIRECT_URL = 'main:home'
 LOGIN_REDIRECT_URL = 'main:home'
 
 CART_SESSION_ID = 'cart'
+STRIPE_SECRET_KEY = ''
