@@ -34,7 +34,7 @@ def create_order(request):
                 )
             cart.clear_items()
             request.session['order_id'] = order.id
-            return redirect('main:home')
+            return redirect('payment:process')
     else:
         form = CreateOrderForm(request=request)
         return render(request, 'orders/create_order.html', {'form': form, 'cart': cart, 'subtotal': subtotal, 'total':total, 'promo': promo_obj, 'discount_dollar': (subtotal - total)})
