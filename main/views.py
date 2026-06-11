@@ -112,3 +112,8 @@ class ProductDetailView(DetailView):
     context_object_name = 'product'
     template_name = 'main/product_detail.html'
     slug_url_kwarg = 'product_slug'
+
+    def get_template_names(self):
+        if self.request.headers.get('HX-Request') == 'true':
+            return ['partial/cart-budge.html']
+        return ['main/product_detail.html']

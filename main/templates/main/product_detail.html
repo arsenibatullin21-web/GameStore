@@ -158,7 +158,10 @@
         </div>
 
       {% if product.stock > 0 and product.is_available %}
-          <form action="{% url 'cart:add' product.id %}" method="post">
+          <form action="{% url 'cart:add' product.id %}" method="post"
+            hx-post="{% url 'cart:add' product.id %}"
+            hx-target="#cart-budgess"
+          >
            {% csrf_token %}
         <button class="pd-btn-buy">Add to Cart</button>
           </form>

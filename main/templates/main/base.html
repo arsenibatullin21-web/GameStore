@@ -38,7 +38,13 @@
                     {% else %}
                         <a class="nav-link" href="{% url 'user:login' %}">Sign In</a>
                     {% endif %}
-                    <a class="btn-download" href="{% url 'cart:detail' %}">Cart {% if cart|length > 0 %}({{ cart|length }}){% endif %}</a>
+                    <a
+                        class="btn-download"
+                        href="{% url 'cart:detail' %}"
+                        id="cart-budgess"
+                    >
+                       {% include 'partial/cart-budge.html' %}
+                    </a>
                 </div>
             </div>
         </nav>

@@ -1,4 +1,4 @@
-from django.contrib.messages.context_processors import messages
+from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
@@ -14,6 +14,12 @@ def cart_detail(request):
     promo_obj = None
     if promo:
         promo_obj = PromoCode.objects.filter(name__iexact=promo).first()
+
+    if request.headers.get('HX-Request') == 'true':
+        target = request.headers.get('HX-Target') == 'true'
+        if target == 'messages':
+            return render(request, 'partial/messages.html', {'cart': cart,'subtotal': cart.get_total(),'total': cart.get_total(promo=promo_obj), 'promo': promo})
+        return render(request, 'partial/cart-response.html', {'cart': cart,'subtotal': cart.get_total(),'total': cart.get_total(promo=promo_obj), 'promo': promo})
     return render(request, 'cart/cart_detail.html', {'cart': cart,'subtotal': cart.get_total(),'total': cart.get_total(promo=promo_obj), 'promo': promo})
 
 @require_POST
@@ -48,10 +54,14 @@ def apply_promo(request):
 
     if promo:
         request.session['promo'] = promo_name
+        messages.success(request, "Promo code applied successfully")
+    else:
+        messages.error(request, 'Promo code in invalid')
 
     return redirect('cart:detail')
 
 def remove_promo(request):
     request.session.pop('promo', None)
     request.session.modified = True
+    messages.info(request, 'Promo code was removed')
     return redirect('cart:detail')

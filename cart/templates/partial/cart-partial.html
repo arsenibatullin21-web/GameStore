@@ -1,0 +1,159 @@
+
+    <!-- LEFT: Cart Items -->
+    <div class="cart-items" id="cart-items">
+
+      <!-- Item 1 -->
+        {% for item in cart %}
+      <div class="cart-item" id="item-1">
+        <img class="cart-item__cover" src="{{ item.product.cover_image.url }}" alt="{{ item.product.name }}">
+        <div class="cart-item__body">
+          <div class="cart-item__top">
+            <div>
+              <div class="cart-item__badges">
+                <span class="ci-badge">Base Game</span>
+                  {% if item.product.discount %}
+                  <span class="ci-badge ci-badge--sale">On Sale</span>
+                  {% endif %}
+                    {% if item.product.price == 0 %}
+                        <span class="ci-badge ci-badge--free">Free</span>
+                    {% endif %}
+              </div>
+              <h2 class="cart-item__name">{{ item.product.name }}</h2>
+              <p class="cart-item__meta">{{ item.product.genre }} &nbsp;·&nbsp; {{ item.product.platform }}</p>
+            </div>
+              <form action="{% url 'cart:remove' item.product_id %}" method="post"
+                    hx-post="{% url 'cart:remove' item.product_id %}"
+                    hx-target="#cart-shell"
+              >
+                  {% csrf_token %}
+                <button class="cart-item__remove"  aria-label="Remove" type="submit">
+                  X
+                </button>
+              </form>
+          </div>
+
+          <div class="cart-item__rating-row">
+            <div class="cart-item__rating-box">
+              <span class="rating-age">18+</span>
+              <span class="rating-desc">Violence, Strong Language</span>
+            </div>
+          </div>
+
+          <div class="cart-item__rewards">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#f5a623" stroke="none"><circle cx="12" cy="12" r="10"/><text x="12" y="16" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">+</text></svg>
+            Earn 5% back in Store Rewards
+          </div>
+
+          <div class="cart-item__footer">
+            <div class="cart-item__qty">
+                <form action="{% url 'cart:update' item.product_id %}"
+                      hx-get="{% url 'cart:update' item.product_id %}"
+                      hx-target="#cart-shell"
+                >
+                    <input type="hidden" value="decrease" name="action">
+                  <button class="qty-btn" type="submit">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </button>
+                </form>
+              <span class="qty-value" id="qty-item-1">{{ item.quantity }}</span>
+                <form action="{% url 'cart:update' item.product_id %}"
+                      hx-get="{% url 'cart:update' item.product_id %}"
+                      hx-target="#cart-shell"
+                >
+                    <input type="hidden" value="increase" name="action">
+                  <button class="qty-btn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  </button>
+                </form>
+            </div>
+            <div class="cart-item__price-group">
+                {% if not item.product.discount %}
+                    {% if item.product.price == 0 %}
+                        <span class="cart-item__unit-price free-price"  id="price-item-3">Free</span>
+                    {% else %}
+                        <span class="cart-item__unit-price"  id="price-item-1">${{ item.product.final_price }}</span>
+                    {% endif %}
+                {% else %}
+                    <span class="cart-item__price-old">${{ item.product.price }}</span>
+                    <span class="cart-item__unit-price" data-base="9.99" id="price-item-2">${{ item.product.final_price }}</span>
+                {% endif %}
+            </div>
+            <button class="cart-item__wishlist">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              Move to Wishlist
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+        {% empty %}
+                  <div class="cart-empty" id="cart-empty" >
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <h3>Your cart is empty</h3>
+        <p>Browse the store and add some games!</p>
+        <a href="{% url 'main:catalog' %}" class="cart-empty__link">Browse Games</a>
+      </div>
+        {% endfor %}
+
+
+      <!-- Empty State (hidden by default) -->
+
+    </div>
+
+    <!-- RIGHT: Summary -->
+    <aside class="cart-summary" id="cart-summary">
+      <h2 class="cs-title">Games and Apps Summary</h2>
+
+      <div class="cs-rows">
+        <div class="cs-row">
+          <span>Price</span>
+          <span id="summary-price">${{ total }}</span>
+        </div>
+        <div class="cs-row">
+          <span>Taxes</span>
+          <span class="cs-tax">Calculated at Checkout</span>
+        </div>
+          <div class="cs-row">
+                  <span>Promo Code:</span>
+                  {% if promo %}
+                      <input type="text" class="promo-wrap" placeholder="{{ promo }}"  disabled>
+
+                      <form action="{% url 'cart:remove_promo' %}"
+                        hx-get="{% url 'cart:remove_promo' %}"
+                        hx-target="#cart-shell"
+                      >
+                      {% csrf_token %}
+                        <button type='submit'>REMOVE</button>
+                      </form>
+                  {% else %}
+                      <form action="{% url 'cart:apply_promo' %}"
+                            hx-get="{% url 'cart:apply_promo' %}"
+                            hx-target="#cart-shell"
+                      >
+                    <input type="text" class="promo-wrap" placeholder="Enter code..." name="promocode">
+                      </form>
+                 {% endif %}
+              <div id="messages">
+                  {% include 'partial/messages.html' %}
+              </div>
+        </div>
+        <div class="cs-row cs-row--discount" id="summary-discount-row">
+          <span>Discount</span>
+          <span id="summary-discount" class="cs-discount-val">-$6.00</span>
+        </div>
+      </div>
+
+      <div class="cs-divider"></div>
+
+      <div class="cs-subtotal">
+        <span>Subtotal</span>
+        <span id="summary-subtotal">${{ total }}</span>
+      </div>
+        {% if cart|length > 0 %}
+            <a href="{% url 'orders:create' %}"><button class="cs-checkout-btn">Check Out</button></a>
+        {% else %}
+        <button class="cs-checkout-btn" disabled style="cursor: not-allowed">Check Out</button>
+        {% endif %}
+      <p class="cs-note">* The lowest price offered in the last 30 days before discount</p>
+    </aside>

@@ -4559,3 +4559,48 @@ a:hover {
   .modal { padding: 24px 18px; }
   .modal__actions { flex-direction: column; }
 }
+
+.message {
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+/* Success */
+.message.success {
+    background: rgba(46, 204, 113, 0.12);
+    border-color: rgba(46, 204, 113, 0.3);
+    color: #2ecc71;
+}
+
+/* Error / Invalid */
+.message.error {
+    background: rgba(231, 76, 60, 0.12);
+    border-color: rgba(231, 76, 60, 0.3);
+    color: #e74c3c;
+}
+
+/* Info */
+.message.info {
+    background: rgba(52, 152, 219, 0.12);
+    border-color: rgba(52, 152, 219, 0.3);
+    color: #3498db;
+}
+
+.message {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
