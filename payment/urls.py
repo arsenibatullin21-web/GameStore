@@ -8,5 +8,5 @@ urlpatterns = [
     path('process/', views.payment_process, name='process'),
     path('cancel/', views.payment_cancel, name='cancel'),
     path('success/', views.payment_success, name='success'),
-    path('webhook', webhooks.payment_webhook ,name='webhook')
-],
+    path('webhook/', webhooks.payment_webhook ,name='webhook')
+]

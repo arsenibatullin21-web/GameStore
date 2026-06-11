@@ -9,5 +9,6 @@
     {% csrf_token %}
     <button type="submit">Logout</button>
 </form>
+    <a href="{% url 'subscription:profile' %}">My Subscription</a>
 </body>
 </html>

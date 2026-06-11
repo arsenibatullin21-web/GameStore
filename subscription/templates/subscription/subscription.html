@@ -1,0 +1,266 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block title %}GameStore | Subscription{% endblock %}
+
+{% block content %}
+<!-- ========== SUBSCRIPTION PAGE ========== -->
+<div class="sub-page">
+
+  <!-- Header -->
+  <div class="sub-header">
+    <span class="sub-header__eyebrow">GameStore Membership</span>
+    <h1 class="sub-header__title">Level Up Your Experience</h1>
+    <p class="sub-header__sub">Unlock exclusive discounts, early access, and premium perks. Cancel anytime.</p>
+
+    <!-- Billing Toggle -->
+    <div class="sub-toggle">
+      <span class="sub-toggle__label" id="toggle-monthly-label">Monthly</span>
+      <label class="sub-toggle__switch">
+        <input type="checkbox" id="billing-toggle" onchange="toggleBilling()">
+        <span class="sub-toggle__track">
+          <span class="sub-toggle__thumb"></span>
+        </span>
+      </label>
+      <span class="sub-toggle__label" id="toggle-annual-label">
+        Annual
+        <span class="sub-toggle__save">Save 20%</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <div class="sub-cards">
+
+    <!-- Basic -->
+      <form method="POST">
+          {% csrf_token %}
+    <div class="sub-card" id="card-basic">
+      <div class="sub-card__top">
+        <div class="sub-card__icon sub-card__icon--basic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div>
+          <h2 class="sub-card__name">Basic</h2>
+          <p class="sub-card__tagline">Everything you need to get started</p>
+        </div>
+      </div>
+          <div class="sub-card__price">
+            <span class="sub-card__amount" id="basic-price">$4.99</span>
+            <span class="sub-card__period" id="basic-period">/ month</span>
+          </div>
+      <p class="sub-card__annual-note" id="basic-annual-note"></p>
+
+      <ul class="sub-card__features">
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          5% discount on all purchases
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Access to weekly free games
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Basic member badge
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Email support
+        </li>
+        <li class="feature-no">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Early access to new releases
+        </li>
+        <li class="feature-no">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Exclusive member-only sales
+        </li>
+        <li class="feature-no">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Priority support
+        </li>
+        <li class="feature-no">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Free game every month
+        </li>
+      </ul>
+        <input type="hidden" name="price_id" value="{{ subscriptions.basic.price.id }}">
+      <button type="submit" class="sub-card__btn sub-card__btn--basic">Get Basic</button>
+      <p class="sub-card__cancel">Cancel anytime · No commitments</p>
+    </div>
+      </form>
+
+    <!-- Pro (Featured) -->
+      <form method="POST">
+          {% csrf_token %}
+    <div class="sub-card sub-card--featured" id="card-pro">
+      <div class="sub-card__popular">Most Popular</div>
+
+      <div class="sub-card__top">
+        <div class="sub-card__icon sub-card__icon--pro">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div>
+          <h2 class="sub-card__name">Pro</h2>
+          <p class="sub-card__tagline">For serious gamers who want more</p>
+        </div>
+      </div>
+
+      <div class="sub-card__price">
+        <span class="sub-card__amount" id="pro-price">$9.99</span>
+        <span class="sub-card__period" id="pro-period">/ month</span>
+      </div>
+      <p class="sub-card__annual-note" id="pro-annual-note"></p>
+
+      <ul class="sub-card__features">
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          15% discount on all purchases
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Access to weekly free games
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Pro member badge
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Priority email support
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Early access to new releases
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Exclusive member-only sales
+        </li>
+        <li class="feature-no">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Priority live chat support
+        </li>
+        <li class="feature-no">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Free game every month
+        </li>
+      </ul>
+        <input type="hidden" name="price_id" value="{{ subscriptions.pro.price.id }}">
+      <button type="submit" class="sub-card__btn sub-card__btn--pro">Get Pro</button>
+      <p class="sub-card__cancel">Cancel anytime · No commitments</p>
+    </div>
+      </form>
+
+    <!-- Premium -->
+      <form method="POST">
+          {% csrf_token %}
+    <div class="sub-card" id="card-premium">
+      <div class="sub-card__top">
+        <div class="sub-card__icon sub-card__icon--premium">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h20M4 20V10l8-8 8 8v10"/><path d="M10 20v-6h4v6"/></svg>
+        </div>
+        <div>
+          <h2 class="sub-card__name">Premium</h2>
+          <p class="sub-card__tagline">The ultimate GameStore experience</p>
+        </div>
+      </div>
+
+      <div class="sub-card__price">
+        <span class="sub-card__amount" id="premium-price">$19.99</span>
+        <span class="sub-card__period" id="premium-period">/ month</span>
+      </div>
+      <p class="sub-card__annual-note" id="premium-annual-note"></p>
+
+      <ul class="sub-card__features">
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          25% discount on all purchases
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Access to weekly free games
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Premium gold member badge
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Priority live chat support
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Early access to new releases
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Exclusive member-only sales
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Dedicated account manager
+        </li>
+        <li class="feature-yes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          1 free game every month
+        </li>
+      </ul>
+         <input type="hidden" name="price_id" value="{{ subscriptions.premium.price.id }}">
+      <button type="submit" class="sub-card__btn sub-card__btn--premium">Get Premium</button>
+      <p class="sub-card__cancel">Cancel anytime · No commitments</p>
+    </div>
+      </form>
+
+  </div>
+
+  <!-- FAQ / Trust strip -->
+  <div class="sub-trust">
+    <div class="sub-trust__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <span>Secure payments</span>
+    </div>
+    <div class="sub-trust__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+      <span>Cancel anytime</span>
+    </div>
+    <div class="sub-trust__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      <span>All major cards accepted</span>
+    </div>
+    <div class="sub-trust__item">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      <span>24/7 support for Pro & Premium</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const prices = {
+  basic:   { monthly: '$4.99',  annual: '$3.99',  annualTotal: '$47.88'  },
+  pro:     { monthly: '$9.99',  annual: '$7.99',  annualTotal: '$95.88'  },
+  premium: { monthly: '$19.99', annual: '$15.99', annualTotal: '$191.88' },
+};
+
+function toggleBilling() {
+  const isAnnual = document.getElementById('billing-toggle').checked;
+
+  ['basic', 'pro', 'premium'].forEach(plan => {
+    const price  = document.getElementById(plan + '-price');
+    const period = document.getElementById(plan + '-period');
+    const note   = document.getElementById(plan + '-annual-note');
+
+    if (isAnnual) {
+      price.textContent  = prices[plan].annual;
+      period.textContent = '/ month';
+      note.textContent   = `Billed as ${prices[plan].annualTotal} / year`;
+    } else {
+      price.textContent  = prices[plan].monthly;
+      period.textContent = '/ month';
+      note.textContent   = '';
+    }
+  });
+}
+</script>
+{% endblock %}

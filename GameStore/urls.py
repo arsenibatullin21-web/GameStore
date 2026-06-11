@@ -26,7 +26,8 @@ urlpatterns = [
     path('user/', include('user.urls', namespace='user')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('orders/', include('orders.urls', namespace='orders')),
-    path('payment/', include('payment.urls', namespace='payment'))
+    path('payment/', include('payment.urls', namespace='payment')),
+    path('subscription/', include('subscription.urls', namespace='subscription')),
 ] + static(settings.STATIC_URL,
                           document_root=settings.STATIC_ROOT)
 
